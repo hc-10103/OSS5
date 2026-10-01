@@ -7,7 +7,65 @@
     <title>Document</title>
 </head>
 
+<style>
+    #container {
+        width: 200px;
+        height: 50px;
+        background-color : yellow;
+    }
+</style>
+
 <body>
+    <h3> 동적 요소 추가</h3>
+    <button id = "add">추가</button>
+    <div id = "container">
+        <p id = "apple">사과</p>
+        <p id = "banana">바나나</p>
+        <p class = "fruits">배</p>
+
+
+    </div>
+
+    <button id = "remove">삭제</button>
+
+    <script>
+        const p1 = document.querySelector("#apple");
+        const p2 = document.querySelector("#banana");
+        const p3 = document.querySelector(".fruits");
+
+        const newp = document.createElement("p");
+        const container1 = document.querySelector("#container");
+        const remove_btn = document.querySelector("#remove");
+
+        remove_btn.addEventListener("click", function(event) {
+            container1.removeChild(p3);
+            newp.innerHTML("<h3> 배고프다 </h3>");
+            container1.appendChild(newp);
+
+        })
+
+    </script>
+
+
+
+
+
+    <hr />
+    <h3>Click Event </h3>
+    <button id = "clickbutton1">눌러보세요(alert)</button>
+    <button id = "clickbutton2">눌러보세요(innerText)</button>
+    <button id = "clickbutton3">눌러보세요(innerHTML)</button>
+    <button id = "clickbutton4">눌러보세요(innerHTML)</button>
+    <div id = "print">
+        여기에 데이터가 바뀝니다!
+    </div>
+
+
+    
+    
+
+
+
 
     <!-- 계산기 -->
 
@@ -44,11 +102,50 @@
 
     const click = document.querySelector("button");
 
-    click.addEventListener("click", function(){
+    click.addEventListener("click", function() {
         add();
     });
 
+    const btn1 = document.querySelector("#clickbutton1");
+    const btn2 = document.querySelector("#clickbutton2");
+    const btn3 = document.querySelector("#clickbutton3");
+    const btn4 = document.querySelector("#clickbutton4");
+    
+    btn1.addEventListener("click", function() {
+        alert("눌러보세요(alert)");
+    });
 
+    btn2.addEventListener("click", function() {
+        const print = document.getElementById("print");
+        print.innerText = "바뀌었습니다!";
+    });
+
+    btn3.addEventListener("mouseover", function() {
+        const print = document.getElementById("print");
+        print.innerHTML = "<h1> 바뀌었습니다! </h1>";
+    })
+
+    btn4.addEventListener("click", function(event) {
+        const print = document.getElementById("print");
+        print.textContent = "ㅁㅇㄴㄹㅁㄴㅇ";
+    })
+    
+    const container = document.getElementById("container");
+    const btn = document.querySelector("#add");
+    const p = document.createElement("p");
+    const adsf = document.createElement("real");
+
+    btn.addEventListener("click", function(event) {
+        p.textContent = "새 문단";
+        adsf.innerHTML = "<p> 레전드사건발생";
+        container.appendChild(p);
+        container.appendChild(adsf);
+    });
+
+
+    
+    
+    
 
 
 </script>
