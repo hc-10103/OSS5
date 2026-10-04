@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 관리 CRUD</title>
+</head>
+
+<body>
+    <header>
+        <h1 id="title"> 영화 관리 프로그램 </h1>
+    </header>
+
+    <form id="movie_form">
+        <div id="input_area">
+            <label for="movie_name">제목</label>
+            <input type="text" id="movie_name" placeholder="영화 이름" required>
+
+            <br><label for="movie_director">감독</label>
+            <input type="text" id="movie_director" placeholder="감독 이름" required>
+
+            <br><label for="movie_year">개봉년도</label>
+            <input type="number" id="movie_year" placeholder="개봉년도" required>
+
+            <br><label for="movie_genre">장르</label>
+            <input type="text" id="movie_genre" placeholder="장르 선택 or 입력" list="genre_list" required>
+
+            <datalist id="genre_list">
+                <option value="액션"></option>
+                <option value="코미디"></option>
+                <option value="드라마"></option>
+                <option value="공포"></option>
+                <option value="SF"></option>
+                <option value="판타지"></option>
+                <option value="애니메이션"></option>
+                <option value="로맨스"></option>
+                <option value="스릴러"></option>
+                <option value="다큐멘터리"></option>
+                <option value="뮤지컬"></option>
+                <option value="범죄"></option>
+                <option value="전쟁"></option>
+                <option value="느와르"></option>
+            </datalist>
+
+            <br><label for="movie_rating">평점</label>
+            <input type="number" id="movie_rating" placeholder="평점(0.5 ~ 5.0)" min="0.5" max="5" step="0.5" required>
+
+            <br><button type="submit" id = "submit_btn">영화 추가</button>
+        </div>
+    </form>
+
+</body>
+
+</html>
