@@ -2,7 +2,7 @@
 
 ## Deployment
 
-- Vercel URL: 배포 후 추가 예정
+- Vercel URL: (https://oss5-murex.vercel.app/)
 
 ## Key Learning
 
