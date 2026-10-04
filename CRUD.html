@@ -58,16 +58,70 @@
     <table>
         <thead>
             <tr>
-                <th id = "title">제목</th>
-                <th id = "director">감독</th>
-                <th id = "year">개봉년도</th>
-                <th id = "genre">장르</th>
-                <th id = "rating">평점</th>
+                <th>제목</th>
+                <th>감독</th>
+                <th>개봉년도</th>
+                <th>장르</th>
+                <th>평점</th>
             </tr>
         </thead>
 
         <tbody id = "movie_list"></tbody>
     </table>
+
+<script>
+    let movies = [ 
+        {
+            id: 1,
+            title: "인셉션",
+            director: "크리스토퍼 놀란",
+            year: 2010,
+            genre: "SF",
+            rating: 4.5
+        },
+        {
+            id: 2,
+            title: "기생충",
+            director: "봉준호",
+            year: 2019,
+            genre: "드라마",
+            rating: 5.0
+        },
+        {
+            id: 3,
+            title: "어벤져스: 엔드게임",
+            director: "안소니 루소, 조 루소",
+            year: 2019,
+            genre: "액션",
+            rating: 4.0
+        }
+    ];
+    
+    window.addEventListener("load", function() {
+        render();
+    });
+
+    function render() {
+        const movie_list = document.querySelector("#movie_list");
+        movie_list.innerHTML = "";
+
+        movies.forEach(function(movie) {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${movie.id}</td>
+                <td>${movie.title}</td>
+                <td>${movie.director}</td>
+                <td>${movie.year}</td>
+                <td>${movie.genre}</td>
+                <td>${movie.rating}</td>
+            `;
+                
+            movie_list.appendChild(row);
+        })
+    }
+</script>
+
 
 </body>
 
