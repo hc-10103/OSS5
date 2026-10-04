@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    window.addEventListener("load", function() {
+        const btn = document.querySelector("#btn1");
+        btn.addEventListener("click", addFruit);
+    });
+
+    function addFruit() {
+        const input_button = document.querySelector("#input_area");
+        const fruit = input_button.value;
+        const list = document.querySelector("#list");
+
+        const li = document.createElement("li");
+        li.textContent = fruit;
+        li.innerHTML += `<button onclick="removeFruit(this)">삭제</button>`;
+
+        list.appendChild(li);
+
+        input_button.value = "";
+    }
+
+    function removeFruit(button) {
+        const li = button.parentElement;
+        li.remove();
+    }
+</script>
+
+<style>
+    
+
+</style>
+
+<body>
+    <input type = "text" id = "input_area" placeholder = "과일 입력">
+    <button id = "btn1" >추가</button>
+    <ul id = "list">
+        
+    </ul>
+
+
+</body>
+</html>
