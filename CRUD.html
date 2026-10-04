@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
@@ -100,6 +100,7 @@
         ];
 
         let nextId = 4;
+        let editingId = null;
 
         window.addEventListener("load", function () {
 
@@ -113,25 +114,68 @@
         function addMovie(event) {
             event.preventDefault();
 
-            const title = document.querySelector("#movie_name").value;
-            const director = document.querySelector("#movie_director").value;
-            const year = parseInt(document.querySelector("#movie_year").value);
-            const genre = document.querySelector("#movie_genre").value;
-            const rating = parseFloat(document.querySelector("#movie_rating").value);
+            const title = document.querySelector("#movie_name").value.trim();
+            const director =
+                document.querySelector("#movie_director").value.trim();
+            const year = parseInt(
+                document.querySelector("#movie_year").value
+            );
+            const genre = document.querySelector("#movie_genre").value.trim();
+            const rating = parseFloat(
+                document.querySelector("#movie_rating").value
+            );
 
-            const newMovie = {
-                id: nextId++,
-                title: title,
-                director: director,
-                year: year,
-                genre: genre,
-                rating: rating
-            };
+            if (editingId === null) {
+                const newMovie = {
+                    id: nextId++,
+                    title: title,
+                    director: director,
+                    year: year,
+                    genre: genre,
+                    rating: rating
+                };
 
-            movies.push(newMovie);
+                movies.push(newMovie);
+            } else {
+                const movie = movies.find(function (movie) {
+                    return movie.id === editingId;
+                });
+
+                movie.title = title;
+                movie.director = director;
+                movie.year = year;
+                movie.genre = genre;
+                movie.rating = rating;
+
+                editingId = null;
+                document.querySelector("#submit_btn").innerText = "영화 추가";
+            }
+
             render();
 
             document.querySelector("#movie_form").reset();
+            document.querySelector("#movie_name").focus();
+        }
+
+        function updateMovie(id) {
+            const movie = movies.find(function (movie) {
+                return movie.id === id;
+            });
+
+            if (!movie) {
+                alert("영화를 찾을 수 없습니다.");
+                return;
+            }
+
+            document.querySelector("#movie_name").value = movie.title;
+            document.querySelector("#movie_director").value = movie.director;
+            document.querySelector("#movie_year").value = movie.year;
+            document.querySelector("#movie_genre").value = movie.genre;
+            document.querySelector("#movie_rating").value = movie.rating;
+
+            editingId = id;
+
+            document.querySelector("#submit_btn").innerText = "수정 저장";
             document.querySelector("#movie_name").focus();
         }
 
@@ -143,6 +187,12 @@
             movies = movies.filter(function (movie) {
                 return movie.id !== id;
             });
+
+            if (editingId === id) {
+                editingId = null;
+                document.querySelector("#movie_form").reset();
+                document.querySelector("#submit_btn").innerText = "영화 추가";
+            }
             render();
         }
 
@@ -161,14 +211,21 @@
                     <td>${movie.genre}</td>
                     <td>${movie.rating}</td>
                     <td>
-                        <button
-                            type="button"
-                            onclick="deleteMovie(${movie.id})"
-                        >
-                            삭제
-                        </button>
+                    <button
+                        type="button"
+                        onclick="updateMovie(${movie.id})"
+                    >
+                        수정
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="deleteMovie(${movie.id})"
+                    >
+                        삭제
+                    </button>
                     </td>
-                `;
+                    `;
 
                 movie_list.appendChild(row);
             })
