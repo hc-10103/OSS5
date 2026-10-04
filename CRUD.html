@@ -58,6 +58,7 @@
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>제목</th>
                 <th>감독</th>
                 <th>개봉년도</th>
@@ -96,10 +97,42 @@
             rating: 4.0
         }
     ];
+
+    let nextId = 4;
     
     window.addEventListener("load", function() {
+
+        const form = document.querySelector("#movie_form");
+        form.addEventListener("submit", addMovie);
         render();
+        
+
     });
+
+    function addMovie(event) {
+        event.preventDefault();
+
+        const title = document.querySelector("#movie_name").value;
+        const director = document.querySelector("#movie_director").value;
+        const year = parseInt(document.querySelector("#movie_year").value);
+        const genre = document.querySelector("#movie_genre").value;
+        const rating = parseFloat(document.querySelector("#movie_rating").value);
+
+        const newMovie = {
+            id: nextId++,
+            title: title,
+            director: director,
+            year: year,
+            genre: genre,
+            rating: rating
+        };
+
+        movies.push(newMovie);
+        render();
+
+        document.querySelector("#movie_form").reset();
+        document.querySelector("#movie_name").focus();
+    }
 
     function render() {
         const movie_list = document.querySelector("#movie_list");
